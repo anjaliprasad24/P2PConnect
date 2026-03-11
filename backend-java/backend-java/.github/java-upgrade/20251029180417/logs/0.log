@@ -1,0 +1,62 @@
+2025-10-29T18:04:17.188Z [INFO] ----------------------invoke generate_upgrade_plan_for_java_project----------------------
+2025-10-29T18:04:17.189Z [INFO] [Tool.invoke]({name: generate_upgrade_plan_for_java_project, input: {
+  "projectPath": "c:\\Users\\anjal\\OneDrive\\Desktop\\ANJALIII\\Peer-2-Peer-Connect\\backend-java\\backend-java",
+  "targetJavaVersion": "21"
+}}).
+2025-10-29T18:04:17.191Z [INFO] [Plan.tryStartTask]({tool:generate_upgrade_plan_for_java_project, nextTask:{type:undefined, tool:undefined}}
+2025-10-29T18:04:17.192Z [INFO] [Plan.tryStartTask]: no next task, create new one.
+2025-10-29T18:04:17.192Z [INFO] [Plan.createTaskAtStart]({tool: generate_upgrade_plan_for_java_project, input: {
+  "projectPath": "c:\\Users\\anjal\\OneDrive\\Desktop\\ANJALIII\\Peer-2-Peer-Connect\\backend-java\\backend-java",
+  "targetJavaVersion": "21",
+  "sessionId": "20251029180417"
+}}).
+2025-10-29T18:04:17.194Z [INFO] [Plan.tryStartTask]: starting currentTask
+2025-10-29T18:04:17.195Z [INFO] [Task.start](): Starting task generatePlan
+2025-10-29T18:04:17.197Z [INFO] [Task.start](1): Started task generatePlan
+2025-10-29T18:04:18.031Z [INFO] [Tool.invoke] validate GitHub Copilot license.
+2025-10-29T18:04:18.929Z [INFO] Copilot user info:{
+  "access_type_sku": "free_limited_copilot",
+  "analytics_tracking_id": "3b002b5b63a776ba1d0169b07b2340c1",
+  "assigned_date": "2025-04-11T00:10:02+05:30",
+  "can_signup_for_limited": false,
+  "chat_enabled": true,
+  "copilot_plan": "individual",
+  "organization_login_list": [],
+  "organization_list": [],
+  "limited_user_quotas": {
+    "chat": 300,
+    "completions": 3774
+  },
+  "limited_user_subscribed_day": 11,
+  "limited_user_reset_date": "2025-11-11",
+  "monthly_quotas": {
+    "chat": 500,
+    "completions": 4000
+  }
+}
+2025-10-29T18:04:18.931Z [WARN] "GitHub Copilot app modernization - upgrade for Java" and its tools are only available for GitHub Copilot "Pro", "Pro+", "Business" and "Enterprise" plans.
+2025-10-29T18:04:18.933Z [ERROR] [Tool.invoke] error occurs when invoking tool generate_upgrade_plan_for_java_project: UserError: "GitHub Copilot app modernization - upgrade for Java" and its tools are only available for GitHub Copilot "Pro", "Pro+", "Business" and "Enterprise" plans.. Please upgrade your GitHub Copilot plan to use this feature or upgrading this project using other tools you prefer..
+2025-10-29T18:04:18.935Z [INFO] [Task.complete](1): Completing task generatePlan
+2025-10-29T18:04:18.937Z [INFO] ----------------------invoked generate_upgrade_plan_for_java_project----------------------
+2025-10-29T18:04:18.938Z [INFO] [Task.complete](1): Completed task generatePlan
+2025-10-29T18:05:09.624Z [INFO] ----------------------invoke install_jdk----------------------
+2025-10-29T18:05:09.625Z [INFO] [Tool.invoke]({name: install_jdk, input: {
+  "version": "21",
+  "projectPath": "c:\\Users\\anjal\\OneDrive\\Desktop\\ANJALIII"
+}}).
+2025-10-29T18:05:09.627Z [INFO] [Plan.tryStartTask]({tool:install_jdk, nextTask:{type:undefined, tool:undefined}}
+2025-10-29T18:05:09.628Z [INFO] [Plan.tryStartTask]: no next task, create new one.
+2025-10-29T18:05:09.629Z [INFO] [Plan.createTaskAtStart]({tool: install_jdk, input: {
+  "version": "21",
+  "projectPath": "c:\\Users\\anjal\\OneDrive\\Desktop\\ANJALIII",
+  "sessionId": "20251029180417"
+}}).
+2025-10-29T18:05:09.630Z [INFO] [Plan.tryStartTask]: starting currentTask
+2025-10-29T18:05:09.630Z [INFO] [Task.start](): Starting task detached
+2025-10-29T18:05:09.631Z [INFO] [Task.start](): Started task detached
+2025-10-29T18:05:09.631Z [INFO] [Tool.invoke] validate GitHub Copilot license.
+2025-10-29T18:05:09.631Z [WARN] "GitHub Copilot app modernization - upgrade for Java" and its tools are only available for GitHub Copilot "Pro", "Pro+", "Business" and "Enterprise" plans.
+2025-10-29T18:05:09.632Z [ERROR] [Tool.invoke] error occurs when invoking tool install_jdk: UserError: "GitHub Copilot app modernization - upgrade for Java" and its tools are only available for GitHub Copilot "Pro", "Pro+", "Business" and "Enterprise" plans.. Please upgrade your GitHub Copilot plan to use this feature or upgrading this project using other tools you prefer..
+2025-10-29T18:05:09.632Z [INFO] [Task.complete](): Completing task detached
+2025-10-29T18:05:09.633Z [INFO] ----------------------invoked install_jdk----------------------
+2025-10-29T18:05:09.635Z [INFO] [Task.complete](): Completed task detached
