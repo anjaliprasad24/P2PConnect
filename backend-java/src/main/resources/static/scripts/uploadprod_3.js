@@ -117,7 +117,11 @@ document.getElementById('productForm').addEventListener('submit', async function
       fd.append('stock', '0');
     }
 
-    const res = await fetch('/api/products', { method: 'POST', body: fd });
+    const res = await fetch('/api/products', {
+    method: 'POST',
+    body: fd
+    });
+    
     const contentType = res.headers.get('content-type') || '';
     const data = contentType.includes('application/json') ? await res.json() : await res.text();
     if (!res.ok) {

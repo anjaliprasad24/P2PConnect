@@ -17,18 +17,14 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(@NonNull ResourceHandlerRegistry registry) {
-        // Serve uploads
+        // Only serve uploads from filesystem
         registry.addResourceHandler("/uploads/**")
                 .addResourceLocations(paths.uploadsDir().toUri().toString());
-        // Serve entire frontEnd directory (scripts, assets, etc.)
-        registry.addResourceHandler("/**")
-                .addResourceLocations(paths.frontEndDir().toUri().toString(),
-                        paths.htmlDir().toUri().toString());
+        // Remove the frontEnd path lines — Spring Boot serves static/ automatically
     }
 
     @Override
     public void addViewControllers(@NonNull ViewControllerRegistry registry) {
-        // Map root to LoginPage_02.html
         registry.addViewController("/").setViewName("forward:/HTML/LoginPage_02.html");
     }
 }
