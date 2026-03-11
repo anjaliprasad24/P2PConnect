@@ -1,6 +1,8 @@
--- Schema for H2 (MySQL compatibility mode)
+-- Schema for PostgreSQL
+
+-- Users table
 CREATE TABLE IF NOT EXISTS users (
-  id BIGINT PRIMARY KEY AUTO_INCREMENT,
+  id BIGSERIAL PRIMARY KEY,
   name VARCHAR(200) NOT NULL,
   email VARCHAR(255) NOT NULL UNIQUE,
   phone VARCHAR(50) NOT NULL,
@@ -8,33 +10,33 @@ CREATE TABLE IF NOT EXISTS users (
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+-- Products table
 CREATE TABLE IF NOT EXISTS products (
-  id BIGINT PRIMARY KEY AUTO_INCREMENT,
+  id BIGSERIAL PRIMARY KEY,
   name VARCHAR(255) NOT NULL,
   price DECIMAL(10,2) NOT NULL DEFAULT 0,
   description TEXT,
   category VARCHAR(100),
-  `condition` VARCHAR(50),
-  mfg_date DATE NULL,
-  expiration_date DATE NULL,
+  "condition" VARCHAR(50),  -- use quotes because CONDITION is a reserved word
+  mfg_date DATE,
+  expiration_date DATE,
   stock INT NOT NULL DEFAULT 0,
   image VARCHAR(500)
 );
 
+-- Orders table
 CREATE TABLE IF NOT EXISTS orders (
-  id BIGINT PRIMARY KEY AUTO_INCREMENT,
-  user_id BIGINT NOT NULL,
+  id BIGSERIAL PRIMARY KEY,
+  user_id BIGINT NOT NULL REFERENCES users(id),
   total DECIMAL(10,2) NOT NULL DEFAULT 0,
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  CONSTRAINT fk_orders_user FOREIGN KEY (user_id) REFERENCES users(id)
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+-- Order Items table
 CREATE TABLE IF NOT EXISTS order_items (
-  id BIGINT PRIMARY KEY AUTO_INCREMENT,
-  order_id BIGINT NOT NULL,
-  product_id BIGINT NOT NULL,
+  id BIGSERIAL PRIMARY KEY,
+  order_id BIGINT NOT NULL REFERENCES orders(id),
+  product_id BIGINT NOT NULL REFERENCES products(id),
   quantity INT NOT NULL,
-  price_each DECIMAL(10,2) NOT NULL,
-  CONSTRAINT fk_items_order FOREIGN KEY (order_id) REFERENCES orders(id),
-  CONSTRAINT fk_items_product FOREIGN KEY (product_id) REFERENCES products(id)
+  price_each DECIMAL(10,2) NOT NULL
 );
