@@ -65,7 +65,7 @@ window.addEventListener('load', () => {
             
             // Redirect after 2 seconds
             setTimeout(() => {
-                window.location.href = 'HomePage_01.html'; // Change to your homepage URL
+                window.location.href = '/HTML/HomePage_01.html'; // Change to your homepage URL
             }, 1000);
         }
 
