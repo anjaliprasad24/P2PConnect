@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Help - P2P Connect</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f8f9fa; color: #2c3e50; }
+    .navbar { display: flex; align-items: center; justify-content: space-between; padding: 15px 30px; background: #00796b; box-shadow: 0 2px 8px rgba(0,0,0,.08); position: sticky; top: 0; z-index: 100; }
+    .app-logo { display: flex; align-items: center; color: #fff; font-size: 24px; font-weight: 700; text-decoration: none; }
+    .logo-icon { width: 40px; height: 40px; background: #fff; border-radius: 12px; margin-right: 12px; display: flex; align-items: center; justify-content: center; color: #00796b; font-weight: 700; }
+    .menu-btn { background: none; border: none; color: #fff; font-size: 24px; cursor: pointer; padding: 8px; border-radius: 5px; }
+    .menu-btn:hover { background: rgba(255,255,255,.1); }
+    .side-menu { position: fixed; top: 0; right: -300px; width: 300px; height: 100vh; background: #fff; box-shadow: -2px 0 10px rgba(0,0,0,.08); transition: right .3s ease-in-out; z-index: 1001; padding: 20px; }
+    .side-menu.active { right: 0; }
+    .menu-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; padding-bottom: 15px; border-bottom: 1px solid #e0e0e0; }
+    .close-btn { background: none; border: none; font-size: 24px; cursor: pointer; color: #576574; }
+    .menu-item { display: block; padding: 15px 0; color: #2c3e50; font-size: 16px; text-decoration: none; border-bottom: 1px solid #f0f0f0; }
+    .menu-item:hover { color: #00796b; }
+    .menu-item:last-child { color: #e67e22; border-bottom: none; }
+    .overlay { position: fixed; top: 0; left: 0; height: 100%; width: 100%; background: rgba(0,0,0,.4); opacity: 0; visibility: hidden; z-index: 1000; transition: visibility .3s ease, opacity .3s ease; }
+    .overlay.active { opacity: 1; visibility: visible; }
+    .container { max-width: 900px; margin: 24px auto; padding: 0 20px; }
+    .section-title { font-size: 28px; font-weight: 700; margin-bottom: 16px; text-align: center; }
+    .help-card { background: #fff; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,.08); padding: 20px; margin-bottom: 16px; }
+    .help-card h3 { margin-bottom: 8px; }
+    .help-list { margin-left: 18px; }
+    .help-list li { margin: 8px 0; }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <a href="HomePage_01.html" class="app-logo">
+      <div class="logo-icon">C</div>
+      P2P Connect
+    </a>
+    <button class="menu-btn" onclick="toggleMenu()">☰</button>
+  </nav>
+
+  <div class="side-menu" id="sideMenu">
+    <div class="menu-header">
+      <h3>Menu</h3>
+      <button class="close-btn" onclick="toggleMenu()">✕</button>
+    </div>
+    <a href="LoginPage_02.html" class="menu-item">👤 Account</a>
+    <a href="cart_7.html" class="menu-item">🛒 Cart</a>
+    <a href="uploadprod_3.html" class="menu-item">💰 Sell</a>
+    <a href="ConfirmationOrder_10.html" class="menu-item">📦 Orders</a>
+    <a href="help.html" class="menu-item">❓ Help</a>
+    <a href="LoginPage_02.html" class="menu-item">🚪 Log Out</a>
+  </div>
+  <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
+
+  <main class="container">
+    <h1 class="section-title">Help & Support</h1>
+
+    <div class="help-card">
+      <h3>Navigation</h3>
+      <ul class="help-list">
+        <li>Use the menu (☰) to go to Account, Cart, Sell, or Orders.</li>
+        <li>Home page lists available products. Click a product to view details.</li>
+      </ul>
+    </div>
+
+    <div class="help-card">
+      <h3>Buying</h3>
+      <ul class="help-list">
+        <li>Add items to cart from the product list or detail page.</li>
+        <li>Open Cart to adjust quantities and proceed to checkout.</li>
+      </ul>
+    </div>
+
+    <div class="help-card">
+      <h3>Selling</h3>
+      <ul class="help-list">
+        <li>Go to Sell to list a new product with images and details.</li>
+      </ul>
+    </div>
+
+    <div class="help-card">
+      <h3>Need more help?</h3>
+      <ul class="help-list">
+        <li>Contact support@example.com</li>
+      </ul>
+    </div>
+  </main>
+
+  <script>
+    function toggleMenu() {
+      const sideMenu = document.getElementById('sideMenu');
+      const overlay = document.getElementById('overlay');
+      sideMenu.classList.toggle('active');
+      overlay.classList.toggle('active');
+    }
+  </script>
+</body>
+</html>

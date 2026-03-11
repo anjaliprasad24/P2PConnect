@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Product Detail</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <style>
+        /* Reset */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        /* Body base styling */
+        body {
+            font-family: 'Poppins', 'Segoe UI', sans-serif;
+            background-color: #f4f6f8; /* Kept original dark background */
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* --- NEW: Navigation Bar --- */
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px 30px;
+            background: #00796b;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .app-logo {
+            display: flex;
+            align-items: center;
+            color: #ffffff;
+            font-size: 24px;
+            font-weight: 700;
+            text-decoration: none;
+        }
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background-color: #ffffff;
+            border-radius: 12px;
+            margin-right: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #00796b;
+            font-weight: 700;
+        }
+        .navbar .menu-btn {
+            margin-left: auto; /* Pushes menu button to the right */
+        }
+        .menu-btn {
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 5px;
+            transition: background-color 0.25s ease;
+        }
+        .menu-btn:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        /* --- NEW: Side Menu & Overlay --- */
+        .side-menu {
+            position: fixed;
+            top: 0;
+            right: -300px;
+            width: 300px;
+            height: 100vh;
+            background: #ffffff;
+            box-shadow: -2px 0 10px rgba(0, 0, 0, 0.08);
+            transition: right 0.3s ease-in-out;
+            z-index: 1001;
+            padding: 20px;
+        }
+        .side-menu.active { right: 0; }
+        .menu-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .close-btn { background: none; border: none; font-size: 24px; cursor: pointer; color: #576574; }
+        .menu-item { display: block; padding: 15px 0; color: #2c3e50; font-size: 16px; text-decoration: none; border-bottom: 1px solid #f0f0f0; transition: color 0.25s ease; }
+        .menu-item:hover { color: #00796b; }
+        .menu-item:last-child { color: #e67e22; border-bottom: none; }
+        .overlay { position: fixed; top: 0; left: 0; height: 100%; width: 100%; background: rgba(0, 0, 0, 0.4); opacity: 0; visibility: hidden; z-index: 1000; transition: visibility 0.3s ease, opacity 0.3s ease; }
+        .overlay.active { opacity: 1; visibility: visible; }
+
+        /* --- Main Content Wrapper --- */
+        .main-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+            min-height: calc(100vh - 74px); /* Full height minus navbar height */
+        }
+
+        /* Wrapper for side-by-side cards */
+        .page-wrapper {
+            display: flex;
+            gap: 30px;
+            width: 100%;
+            max-width: 1400px;
+            align-items: flex-start;
+        }
+        .card {
+            background: #fff;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.12);
+            border-radius: 20px;
+            padding: 35px;
+        }
+        .product-card {
+            flex: 2.5;
+            display: flex;
+            gap: 40px;
+        }
+        .details-card {
+            flex: 1;
+        }
+        .product-image {
+            flex: 1;
+            border-radius: 15px;
+            overflow: hidden;
+            background: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .product-image img {
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+        }
+        .product-info {
+            flex: 1.2;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .product-info h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            line-height: 1.2;
+        }
+        .seller {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #1e88e5;
+            margin-bottom: 20px;
+        }
+        .price {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        .stock-status {
+            font-weight: 600;
+            color: #43a047;
+            font-size: 1.1rem;
+            margin-bottom: 25px;
+        }
+        .actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+        .quantity-selector input {
+            width: 70px;
+            padding: 10px;
+            font-size: 1rem;
+            text-align: center;
+            border-radius: 8px;
+            border: 2px solid #ccc;
+            font-weight: 600;
+        }
+        .quantity-selector input:focus {
+            border-color: #4caf50;
+            outline: none;
+        }
+        .buttons {
+            display: flex;
+            gap: 15px;
+        }
+        button.btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            border: none;
+            padding: 14px 24px;
+            font-size: 1rem;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        button.add-cart {
+            flex-grow: 1;
+            background-color: #4caf50;
+            color: #fff;
+            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.4);
+        }
+        button.add-cart:hover {
+            background-color: #388e3c;
+            transform: translateY(-2px);
+            box-shadow: 0 7px 20px rgba(56, 142, 60, 0.5);
+        }
+        .product-details h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        .product-details p {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #555;
+        }
+        
+        /* Responsive stacking for smaller screens */
+        @media (max-width: 1200px) {
+            .page-wrapper {
+                flex-direction: column;
+            }
+        }
+        @media (max-width: 768px) {
+            .product-card {
+                flex-direction: column;
+            }
+            .product-info h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="HomePage_01.html" class="app-logo">
+            <div class="logo-icon">C</div>
+            P2P Connect
+        </a>
+        <button class="menu-btn" onclick="toggleMenu()">☰</button>
+    </nav>
+
+    <div class="side-menu" id="sideMenu">
+        <div class="menu-header">
+            <h3>Menu</h3>
+            <button class="close-btn" onclick="toggleMenu()">✕</button>
+        </div>
+        <a href="LoginPage_02.html" class="menu-item" >👤 Account</a>
+        <a href="cart_7.html" class="menu-item" >🛒 Cart</a>
+        <a href="uploadprod_3.html" class="menu-item" >💰 Sell</a>
+        <a href="ConfirmationOrder_10.html" class="menu-item" >📦 Orders</a>
+        <a href="help.html" class="menu-item" >❓ Help</a>
+        <a href="LoginPage_02.html" class="menu-item" >🚪 Log Out</a>
+    </div>
+
+    <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
+    
+    <main class="main-content">
+        <div class="page-wrapper">
+
+            <div class="card product-card">
+                <div class="product-image">
+                    <img src="https://via.placeholder.com/400" alt="Product Image" />
+                </div>
+
+                <div class="product-info">
+                    <div>
+                        <h1>Modern Ergonomic Chair</h1>
+                        <div class="seller">by OfficeMaster</div>
+                        <div class="price">₹12,999</div>
+                        <div class="stock-status">In Stock</div>
+                    </div>
+                
+                    <div>
+                        <div class="actions">
+                            <div class="quantity-selector">
+                                <label for="quantity" style="font-weight: 600; margin-right: 10px;">Quantity:</label>
+                                <input type="number" id="quantity" name="quantity" value="1" min="1" max="10">
+                            </div>
+                        </div>
+                        <div class="buttons">
+                            <button class="btn add-cart" type="button"><i class='bx bx-cart-add'></i> Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card details-card">
+                <div class="product-details">
+                    <h2>Product Details</h2>
+                    <p>This ergonomic chair provides ultimate comfort and support. Features include adjustable lumbar support, breathable mesh back, and a durable frame. Perfect for long hours of work or study.</p>
+                </div>
+            </div>
+
+        </div>
+    </main>
+    
+    <script>
+        function toggleMenu() {
+            const sideMenu = document.getElementById('sideMenu');
+            const overlay = document.getElementById('overlay');
+            sideMenu.classList.toggle('active');
+            overlay.classList.toggle('active');
+        }
+
+        // Load product details by id from URL
+        document.addEventListener('DOMContentLoaded', function() {
+            (async () => {
+                try {
+                    const id = new URLSearchParams(location.search).get('id');
+                    if (!id) return;
+                    const res = await fetch(`/api/products/${encodeURIComponent(id)}`);
+                    if (!res.ok) return;
+                    const p = await res.json();
+
+                    const imgEl = document.querySelector('.product-image img');
+                    const nameEl = document.querySelector('.product-info h1');
+                    const priceEl = document.querySelector('.price');
+                    const detailsEl = document.querySelector('.product-details p');
+
+                    if (imgEl) imgEl.src = p.image || 'https://via.placeholder.com/400';
+                    if (nameEl) nameEl.textContent = p.name || '';
+                    if (priceEl) priceEl.textContent = `₹${p.price ?? ''}`;
+                    if (detailsEl) detailsEl.textContent = p.description || '';
+                } catch (e) {
+                    console.error('Failed to load product detail', e);
+                }
+            })();
+        });
+    </script>
+</body>
+</html>
