@@ -4,14 +4,14 @@ FROM eclipse-temurin:17-jdk-alpine
 # Set working directory
 WORKDIR /app
 
-# Copy project files
-COPY pom.xml .
-COPY src ./src
+# Copy pom.xml and src from one level up
+COPY ../pom.xml .
+COPY ../src ./src
 
-# Build the project inside Docker
+# Build the project
 RUN ./mvnw clean package -DskipTests
 
-# Expose the port your app runs on
+# Expose port 4000
 EXPOSE 4000
 
 # Run Spring Boot on port 4000
