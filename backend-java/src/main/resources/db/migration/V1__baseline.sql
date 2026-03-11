@@ -1,6 +1,6 @@
 -- Users
 CREATE TABLE IF NOT EXISTS users (
-  id BIGINT PRIMARY KEY AUTO_INCREMENT,
+  id BIGSERIAL PRIMARY KEY,
   name VARCHAR(200) NOT NULL,
   email VARCHAR(255) NOT NULL UNIQUE,
   phone VARCHAR(50) NOT NULL,
@@ -10,21 +10,21 @@ CREATE TABLE IF NOT EXISTS users (
 
 -- Products
 CREATE TABLE IF NOT EXISTS products (
-  id BIGINT PRIMARY KEY AUTO_INCREMENT,
+  id BIGSERIAL PRIMARY KEY,
   name VARCHAR(255) NOT NULL,
   price DECIMAL(10,2) NOT NULL DEFAULT 0,
   description TEXT,
   category VARCHAR(100),
-  `condition` VARCHAR(50),
-  mfg_date DATE NULL,
-  expiration_date DATE NULL,
+  "condition" VARCHAR(50),  -- double quotes instead of backticks
+  mfg_date DATE,
+  expiration_date DATE,
   stock INT NOT NULL DEFAULT 0,
   image VARCHAR(500)
 );
 
 -- Orders
 CREATE TABLE IF NOT EXISTS orders (
-  id BIGINT PRIMARY KEY AUTO_INCREMENT,
+  id BIGSERIAL PRIMARY KEY,
   user_id BIGINT NOT NULL,
   total DECIMAL(10,2) NOT NULL DEFAULT 0,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS orders (
 
 -- Order Items
 CREATE TABLE IF NOT EXISTS order_items (
-  id BIGINT PRIMARY KEY AUTO_INCREMENT,
+  id BIGSERIAL PRIMARY KEY,
   order_id BIGINT NOT NULL,
   product_id BIGINT NOT NULL,
   quantity INT NOT NULL,
