@@ -1,21 +1,8 @@
-# Use Java 21 JDK
 FROM eclipse-temurin:21-jdk-alpine
-
-# Install Maven and bash
 RUN apk add --no-cache bash maven
-
-# Set working directory
 WORKDIR /app
-
-# Copy project files
 COPY pom.xml .
 COPY src ./src
-
-# Build the project (skip tests for faster build)
 RUN mvn clean package -DskipTests
-
-# Expose your app port
 EXPOSE 4000
-
-# Run the Spring Boot jar
 CMD ["java", "-jar", "target/backend-java-0.0.1-SNAPSHOT.jar", "--server.port=4000"]
