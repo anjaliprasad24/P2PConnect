@@ -194,7 +194,7 @@
             const data = await res.json();
             if (res.ok) {
                 localStorage.setItem('user', JSON.stringify(data));
-                window.location.href = 'HomePage_01.html';
+                window.location.href = '/HTML/HomePage_01.html';
             } else {
                 errorEl.textContent = data.error || 'Invalid email or password.';
                 errorEl.style.display = 'block';
