@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - College Connect</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #00796b;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .login-container {
+            background: rgba(255,255,255,0.95);
+            border-radius: 25px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+            width: 90%;
+            max-width: 450px;
+            padding: 40px;
+        }
+        .logo {
+            width: 80px; height: 80px;
+            background: linear-gradient(135deg, #388E3C, #4CAF50);
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex; align-items: center; justify-content: center;
+            color: white; font-size: 20px; font-weight: bold;
+        }
+        h1 { text-align: center; font-size: 26px; color: #333; margin-bottom: 5px; }
+        .subtitle { text-align: center; color: #666; font-size: 14px; margin-bottom: 25px; }
+
+        /* Tabs */
+        .tabs { display: flex; margin-bottom: 25px; border-radius: 12px; overflow: hidden; border: 2px solid #e1e5e9; }
+        .tab-btn {
+            flex: 1; padding: 12px;
+            border: none; background: #f8f9fa;
+            font-size: 15px; font-weight: 600;
+            cursor: pointer; color: #666;
+            transition: all 0.3s ease;
+        }
+        .tab-btn.active { background: #00796b; color: white; }
+
+        /* Forms */
+        .form-section { display: none; }
+        .form-section.active { display: block; }
+
+        .form-group { margin-bottom: 20px; }
+        .form-label {
+            display: block; margin-bottom: 6px;
+            color: #555; font-weight: 600;
+            font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px;
+        }
+        .form-input, .form-select {
+            width: 100%; padding: 13px 18px;
+            border: 2px solid #e1e5e9; border-radius: 12px;
+            font-size: 15px; transition: all 0.3s ease;
+            background: white; color: #333;
+        }
+        .form-input:focus, .form-select:focus {
+            outline: none; border-color: #4CAF50;
+            box-shadow: 0 0 15px rgba(76,175,80,0.2);
+        }
+        .form-select {
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=US-ASCII,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'><path fill='%23666' d='m2 0-2 2h4zm0 5 2-2h-4z'/></svg>");
+            background-repeat: no-repeat;
+            background-position: right 15px center;
+            background-size: 12px;
+        }
+        .submit-btn {
+            width: 100%; padding: 15px;
+            background: linear-gradient(135deg, #388E3C, #4CAF50);
+            color: white; border: none; border-radius: 12px;
+            font-size: 16px; font-weight: 700;
+            cursor: pointer; transition: all 0.3s ease;
+            text-transform: uppercase; letter-spacing: 1px;
+            margin-top: 5px;
+        }
+        .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(46,125,50,0.35); }
+        .error-msg { color: #e74c3c; font-size: 13px; margin-top: 10px; text-align: center; display: none; }
+        .security-badge {
+            text-align: center; margin-top: 20px;
+            color: #888; font-size: 12px;
+            display: flex; align-items: center; justify-content: center; gap: 6px;
+        }
+        .security-badge span:first-child { color: #4CAF50; }
+    </style>
+</head>
+<body>
+<div class="login-container">
+    <div class="logo">P2P</div>
+    <h1>College Connect</h1>
+    <p class="subtitle">Your college peer-to-peer marketplace</p>
+
+    <div class="tabs">
+        <button class="tab-btn active" onclick="switchTab('login')">Login</button>
+        <button class="tab-btn" onclick="switchTab('register')">Register</button>
+    </div>
+
+    <!-- Login Form -->
+    <div class="form-section active" id="loginSection">
+        <div class="form-group">
+            <label class="form-label">Email Address</label>
+            <input type="email" class="form-input" id="loginEmail" placeholder="Enter your college email" required>
+        </div>
+        <div class="form-group">
+            <label class="form-label">Password</label>
+            <input type="password" class="form-input" id="loginPassword" placeholder="Enter your password" required>
+        </div>
+        <p class="error-msg" id="loginError"></p>
+        <button class="submit-btn" onclick="handleLogin()">Login</button>
+    </div>
+
+    <!-- Register Form -->
+    <div class="form-section" id="registerSection">
+        <div class="form-group">
+            <label class="form-label">Full Name</label>
+            <input type="text" class="form-input" id="regName" placeholder="Enter your full name" required>
+        </div>
+        <div class="form-group">
+            <label class="form-label">Email Address</label>
+            <input type="email" class="form-input" id="regEmail" placeholder="Enter your college email" required>
+        </div>
+        <div class="form-group">
+            <label class="form-label">Password</label>
+            <input type="password" class="form-input" id="regPassword" placeholder="Create a password" required>
+        </div>
+        <div class="form-group">
+            <label class="form-label">Phone Number</label>
+            <input type="tel" class="form-input" id="regPhone" placeholder="Enter your phone number" required>
+        </div>
+        <div class="form-group">
+            <label class="form-label">Hostel Name</label>
+            <select class="form-select" id="regHostel" required>
+                <option value="" disabled selected>Select your hostel</option>
+                <option value="adhiyaman">Adhiyaman</option>
+                <option value="agasthiyar">Agasthiyar</option>
+                <option value="began">Began</option>
+                <option value="esq-a-block">ESQ A Block</option>
+                <option value="esq-b-block">ESQ B Block</option>
+                <option value="kaari">Kaari</option>
+                <option value="kalpana-chawla">Kalpana Chawla</option>
+                <option value="kopperundevi-m-block">Kopperundevi (M Block)</option>
+                <option value="malligai-block">Malligai Block</option>
+                <option value="manoranjitham">Manoranjitham</option>
+                <option value="meenakshi">Meenakshi</option>
+                <option value="mullai">Mullai</option>
+                <option value="n-block">N Block</option>
+                <option value="nelson-mandela">Nelson Mandela</option>
+                <option value="oori">Oori</option>
+                <option value="paari">Paari</option>
+                <option value="sannasi">Sannasi</option>
+                <option value="senbagam-block">Senbagam Block</option>
+                <option value="thamarai-block">Thamarai Block</option>
+                <option value="na">N/A (Day Scholar)</option>
+            </select>
+        </div>
+        <p class="error-msg" id="registerError"></p>
+        <button class="submit-btn" onclick="handleRegister()">Create Account</button>
+    </div>
+
+    <div class="security-badge">
+        <span>🔒</span>
+        <span>Your information is secure and encrypted</span>
+    </div>
+</div>
+
+<script>
+    function switchTab(tab) {
+        document.querySelectorAll('.tab-btn').forEach((btn, i) => {
+            btn.classList.toggle('active', (i === 0 && tab === 'login') || (i === 1 && tab === 'register'));
+        });
+        document.getElementById('loginSection').classList.toggle('active', tab === 'login');
+        document.getElementById('registerSection').classList.toggle('active', tab === 'register');
+    }
+
+    async function handleLogin() {
+        const email = document.getElementById('loginEmail').value.trim();
+        const password = document.getElementById('loginPassword').value;
+        const errorEl = document.getElementById('loginError');
+        errorEl.style.display = 'none';
+
+        if (!email || !password) {
+            errorEl.textContent = 'Please fill in all fields.';
+            errorEl.style.display = 'block';
+            return;
+        }
+
+        try {
+            const res = await fetch('/api/auth/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, password })
+            });
+            const data = await res.json();
+            if (res.ok) {
+                localStorage.setItem('user', JSON.stringify(data));
+                window.location.href = 'HomePage_01.html';
+            } else {
+                errorEl.textContent = data.error || 'Invalid email or password.';
+                errorEl.style.display = 'block';
+            }
+        } catch (err) {
+            errorEl.textContent = 'Something went wrong. Please try again.';
+            errorEl.style.display = 'block';
+        }
+    }
+
+    async function handleRegister() {
+        const name = document.getElementById('regName').value.trim();
+        const email = document.getElementById('regEmail').value.trim();
+        const password = document.getElementById('regPassword').value;
+        const phone = document.getElementById('regPhone').value.trim();
+        const hostel = document.getElementById('regHostel').value;
+        const errorEl = document.getElementById('registerError');
+        errorEl.style.display = 'none';
+
+        if (!name || !email || !password || !phone || !hostel) {
+            errorEl.textContent = 'Please fill in all fields.';
+            errorEl.style.display = 'block';
+            return;
+        }
+
+        try {
+            const res = await fetch('/api/users', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name, email, password, phone, hostel })
+            });
+            const data = await res.json();
+            if (res.ok) {
+                localStorage.setItem('user', JSON.stringify(data));
+                window.location.href = 'HomePage_01.html';
+            } else {
+                errorEl.textContent = data.error || 'Registration failed.';
+                errorEl.style.display = 'block';
+            }
+        } catch (err) {
+            errorEl.textContent = 'Something went wrong. Please try again.';
+            errorEl.style.display = 'block';
+        }
+    }
+</script>
+</body>
+</html>

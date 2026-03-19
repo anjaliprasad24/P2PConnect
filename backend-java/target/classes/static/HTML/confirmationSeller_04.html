@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Listed - College Connect</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            /* Changed background to dark green */
+            background: #00796b;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px; /* Added padding for better spacing on small screens */
+        }
+
+        /* Main Content Container */
+        .confirmation-container {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 60px 40px;
+            border-radius: 35px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Logo Container */
+        .logo-container {
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .logo-icon {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, #26C6DA 0%, #00ACC1 100%);
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 60px;
+            font-weight: bold;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+        /* ADD APP LOGO ICON IMAGE HERE - Replace background and content with: background-image: url('path/to/logo.png'); background-size: cover; */
+
+        /* Success Message */
+        .success-title {
+            font-size: 32px;
+            font-weight: bold;
+            color: #00838F;
+            margin-bottom: 10px;
+        }
+
+        .success-subtitle {
+            font-size: 24px;
+            color: #00ACC1;
+            margin-bottom: 20px;
+        }
+
+        .seller-message {
+            font-size: 18px;
+            color: #666;
+            font-style: italic;
+            margin-bottom: 30px;
+        }
+
+        /* Action Buttons */
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #66ead2 0%, #4ba27f 100%);
+            color: white;
+            box-shadow: 0 5px 15px rgba(38, 198, 218, 0.3);
+        }
+
+        .btn-primary:hover {
+            /* Removed hover animation, added a subtle brightness change */
+            filter: brightness(1.1);
+        }
+
+        .btn-tertiary {
+            background: white;
+            color: #00838F;
+            border: 2px solid #00838F;
+        }
+
+        .btn-tertiary:hover {
+            background: #00838F;
+            color: white;
+        }
+
+        /* Product Icon Styles */
+        .product-icons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .product-icon {
+            font-size: 24px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .confirmation-container {
+                padding: 40px 30px;
+                margin: 20px;
+            }
+
+            .logo-icon {
+                width: 100px;
+                height: 100px;
+                font-size: 40px;
+            }
+
+            .success-title {
+                font-size: 28px;
+            }
+
+            .success-subtitle {
+                font-size: 20px;
+            }
+
+            .seller-message {
+                font-size: 16px;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 200px;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .confirmation-container {
+                padding: 30px 20px;
+            }
+
+            .logo-icon {
+                width: 80px;
+                height: 80px;
+                font-size: 32px;
+            }
+
+            .success-title {
+                font-size: 24px;
+            }
+
+            .success-subtitle {
+                font-size: 18px;
+            }
+
+            .product-icon {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="confirmation-container">
+        <div class="logo-container">
+            <div class="logo-icon">
+                📦
+                </div>
+        </div>
+
+        <h1 class="success-title">Congo!</h1>
+        <h2 class="success-subtitle">Item Listed</h2>
+        
+        <div class="product-icons">
+            <span class="product-icon">📚</span>
+            <span class="product-icon">💻</span>
+            <span class="product-icon">🚲</span>
+        </div>
+        
+        <p class="seller-message">Now you are officialy a part of P2P!</p>
+
+        <div class="action-buttons">
+            <button class="btn btn-primary" onclick="window.location.href='HomePage_01.html'">
+                🏠 Back to Home
+            </button>
+
+            <button class="btn btn-tertiary" onclick="window.location.href='uploadprod_3.html'">
+                📤 Sell More
+            </button>
+        </div>
+    </div>
+</body>
+</html>
