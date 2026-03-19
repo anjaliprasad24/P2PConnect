@@ -229,7 +229,7 @@
             const data = await res.json();
             if (res.ok) {
                 localStorage.setItem('user', JSON.stringify(data));
-                window.location.href = 'HomePage_01.html';
+                window.location.href = '/HTML/HomePage_01.html';
             } else {
                 errorEl.textContent = data.error || 'Registration failed.';
                 errorEl.style.display = 'block';
