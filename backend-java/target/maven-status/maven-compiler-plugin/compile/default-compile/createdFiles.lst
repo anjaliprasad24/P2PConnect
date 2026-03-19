@@ -1,4 +1,5 @@
 com\p2pconnect\repository\UserRepository.class
+com\p2pconnect\config\SecurityConfig.class
 com\p2pconnect\model\OrderItem.class
 com\p2pconnect\controller\ProductsController.class
 com\p2pconnect\controller\UsersController.class
@@ -11,6 +12,7 @@ com\p2pconnect\repository\OrderItemRepository.class
 com\p2pconnect\Application.class
 com\p2pconnect\config\PathConfig.class
 com\p2pconnect\config\WebConfig.class
+com\p2pconnect\controller\AuthController.class
 com\p2pconnect\repository\OrderRepository.class
 com\p2pconnect\config\PathConfig$PathsHolder.class
 com\p2pconnect\model\Order.class
